@@ -1,0 +1,13 @@
+# Archvios temporales
+.coverage
+*.coverage
+.pytest_cache
+*.pytest_cache
+
+# Entorno virtual
+.venv
+venv/
+
+# Bases de datos y temporales de bases de datos
+*.db
+*.pyc
