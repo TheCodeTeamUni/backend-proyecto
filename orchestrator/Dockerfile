@@ -5,6 +5,7 @@ FROM python:3.9-slim-buster
 WORKDIR /app
 
 # Set enviroment variables
+ENV USERS_PATH default
 
 # Install pip requirements
 RUN pip install --upgrade pip

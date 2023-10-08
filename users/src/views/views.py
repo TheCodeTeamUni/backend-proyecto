@@ -66,5 +66,11 @@ class VistaSignUp(Resource):
 class VistaPong(Resource):
 
     def get(self):
-        # Retorna pong: /users/ping
+        # Retorna pong: /
         return 'pong', 200
+    
+class VistaPongUsers(Resource):
+
+    def get(self):
+        # Retorna pong: /
+        return 'pong desde users', 200
