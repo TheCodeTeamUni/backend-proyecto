@@ -12,4 +12,4 @@
 1. Create image orchestratos: `docker build -t orchestrator orchestrator`
 2. Create and run container: `docker run -d -p 3000:3000 orchestrator`
 3. Create image users: `docker build -t users users`
-4. Create and run container: `docker run -d -p 3001:3001 -e DATABASE_URL=postgresql://postgres:wEIvgyGk17NtJyMAFvVM@bd-users.cozsivdeikvp.us-east-1.rds.amazonaws.com:5432/users users`
+4. Create and run container: `docker run -d -p 3001:3001 -e DATABASE_URL=... users`
