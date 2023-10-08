@@ -1,0 +1,44 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 691179146525.dkr.ecr.us-east-1.amazonaws.com
+    finally:
+      - echo Finish Pre Build Phase ...
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image for orchestrator ...
+      - docker build -t orch_app orchestrator/
+      - docker tag orch_app:latest 691179146525.dkr.ecr.us-east-1.amazonaws.com/orch_app:latest
+      - echo Building the Docker image for users ...
+      - docker build -t users_app users/
+      - docker tag users_app:latest 691179146525.dkr.ecr.us-east-1.amazonaws.com/users_app:latest
+    finally:
+      - echo Build completed on `date`
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image orchestrator ...
+      - docker push 691179146525.dkr.ecr.us-east-1.amazonaws.com/orch_app:latest
+      - echo Pushing the Docker image users ...
+      - docker push 691179146525.dkr.ecr.us-east-1.amazonaws.com/users_app:latest
+      - echo Writing Image Definitions file...
+      - printf '[{"name":"orch_app","imageUri":"691179146525.dkr.ecr.us-east-1.amazonaws.com/orch_app:latest"}, {"name":"users_app","imageUri":"691179146525.dkr.ecr.us-east-1.amazonaws.com/users_app:latest"}]' > imagedefinitions.json
+      - printf '{"ImageURI":"691179146525.dkr.ecr.us-east-1.amazonaws.com/orch_app:latest"}, {"ImageURI":"691179146525.dkr.ecr.us-east-1.amazonaws.com/users_app:latest"}' > imageDetail.json
+      - cat imagedefinitions.json
+artifacts:
+  files:
+    - "**/*"
+    - imagedefinitions.json
+    - imageDetail.json
+  secondary-artifacts:
+    DefinitionArtifact:
+      files:
+        - appspec.yaml
+        - taskdef.json
+    ImageArtifact:
+      files:
+        - imageDetail.json
