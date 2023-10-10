@@ -9,7 +9,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t users_app .
+      - docker build -t users_app users/
       - docker tag users_app:latest 691179146525.dkr.ecr.us-east-1.amazonaws.com/users_app:latest
   post_build:
     commands:
