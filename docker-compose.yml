@@ -1,10 +1,21 @@
 version: '3.7'
 
 services:
+  users_app:
     build:
-      context: ./${DIR}
-    image: ${IMAGE_URL}
+      context: ./users
+    container_name: users_app
+    image: 691179146525.dkr.ecr.us-east-1.amazonaws.com/users_app:latest
     ports:
-      - ${PORT}:${PORT}
+      - "3001"
     environment:
-      - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_URL={DATABASE_URL}
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - users_app
+    ports:
+      - "80:80"
