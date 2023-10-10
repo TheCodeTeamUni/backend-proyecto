@@ -15,7 +15,7 @@ services:
     container_name: nginx
     depends_on:
       - users_app
-    image: 691179146525.dkr.ecr.us-east-1.amazonaws.com/nginx:latest
+    image: 691179146525.dkr.ecr.us-east-1.amazonaws.com/nginx
     ports:
       - "80:80"
     build: 
