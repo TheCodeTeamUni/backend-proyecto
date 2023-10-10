@@ -7,15 +7,16 @@ services:
     container_name: users_app
     image: 691179146525.dkr.ecr.us-east-1.amazonaws.com/users_app:latest
     ports:
-      - "3001"
+      - "3001:3001"
     environment:
       - DATABASE_URL={DATABASE_URL}
 
   nginx:
-    image: nginx:latest
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    container_name: nginx
     depends_on:
       - users_app
+    image: 691179146525.dkr.ecr.us-east-1.amazonaws.com/nginx
     ports:
       - "80:80"
+    build: 
+      context: ./nginx

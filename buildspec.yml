@@ -9,13 +9,12 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t users_app users/
-      - docker tag users_app:latest 691179146525.dkr.ecr.us-east-1.amazonaws.com/users_app:latest
+      - docker-compose --file=docker-compose.yml build
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push 691179146525.dkr.ecr.us-east-1.amazonaws.com/users_app:latest
+      - docker-compose --file=docker-compose.yml push
 artifacts:
   files:
-    - '**/*'
+    - 'Dockerrun.aws.json'
