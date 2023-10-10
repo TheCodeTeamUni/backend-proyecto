@@ -15,3 +15,7 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker-compose --file=docker-compose.yml push
+
+artifacts:
+  files:
+    - '**/*'
