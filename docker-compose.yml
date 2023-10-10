@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+    build:
+      context: ./${DIR}
+    image: ${IMAGE_URL}
+    ports:
+      - ${PORT}:${PORT}
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
