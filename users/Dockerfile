@@ -1,5 +1,5 @@
 # Pull official base image
-FROM alpine:3.14
+FROM public.ecr.aws/docker/library/python:3.9-slim-buster
 
 # Set work directory
 WORKDIR /app
