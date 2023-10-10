@@ -1,5 +1,5 @@
 {
-    "AWSEBDockerrunVersion": 2,
+    "AWSEBDockerrunVersion": 1,
     "containerDefinitions": [
         {
             "name": "users_app",
@@ -17,7 +17,7 @@
         {
             "name": "nginx",
             "image": "691179146525.dkr.ecr.us-east-1.amazonaws.com/nginx",
-            "hostname": "nginx",
+            "memory": 128,
             "essential": true,
             "portMappings": [
                 {
@@ -25,8 +25,7 @@
                     "containerPort": 80
                 }
             ],
-            "links": "users_app",
-            "memory": 512
+            "links": "users_app"
         }
     ]
 }
