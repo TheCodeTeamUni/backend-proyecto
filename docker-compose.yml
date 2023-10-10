@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  users_app:
+    build:
+      context: ./users
+    container_name: users_app
+    ports:
+      - 3001:3001
+    environment:
+      - DATABASE_URL=postgresql://postgres:admin@host.docker.internal:5432/postgres
+
+  orch_app:
+    build:
+      context: ./orchestrator
+    container_name: orch_app
+    ports:
+      - 3000:3000
+    environment:
+      - USERS_PATH=users_app:3001
+    depends_on:
+      - users_app
