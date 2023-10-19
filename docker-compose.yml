@@ -1,15 +1,11 @@
 version: '3.7'
 
 services:
-  users_app:
+  orch_app:
     build:
-      context: ./users
-    container_name: users_app
-    image: 691179146525.dkr.ecr.us-east-1.amazonaws.com/users_app:latest
-    ports:
-      - "3001:3001"
-    environment:
-      - DATABASE_URL={DATABASE_URL}
+      context: ./orchestrator
+    container_name: orch_app
+    image: 691179146525.dkr.ecr.us-east-1.amazonaws.com/orch_app:latest
 
   nginx:
     container_name: nginx
